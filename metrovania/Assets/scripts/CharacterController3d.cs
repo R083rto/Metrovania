@@ -19,7 +19,6 @@ public class CharacterController3d : MonoBehaviour
     [SerializeField] private float wallSlideForce = 0.01f;
     [SerializeField] private float wallJumptimer = 0.15f;
 
-
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
@@ -94,8 +93,7 @@ public class CharacterController3d : MonoBehaviour
     public void Move(float move, bool crouch, bool jump)
     {
         // add crouching functionality here
-
-        Debug.Log(move);
+        
 
         if(m_Grounded || m_Aircontrol)
         {
@@ -130,12 +128,12 @@ public class CharacterController3d : MonoBehaviour
         if(m_Grounded && jump)
         {
             m_Grounded = false;
-            OnJumpEvent.Invoke();
             playerRigidbody.AddForce(jumpDir * m_JumpForce);
+            OnJumpEvent.Invoke();
         }
         else if(!m_Grounded && jump)
         {
-            //wall and duoble jump
+            //wall and double jump
             
             if (IsPlayerWithinInteractionDistanceToWall(m_RightCheck.position))
             {
@@ -153,7 +151,6 @@ public class CharacterController3d : MonoBehaviour
                     velocityToAply = (new Vector3(-Physics.gravity.normalized.x * wallJumpForceY, Physics.gravity.normalized.x * -wallJumpForceX, 0f));
                 }
                 OnJumpEvent.Invoke();
-                Debug.Log("just wall jumped right");
             }
             else if (IsPlayerWithinInteractionDistanceToWall(m_LeftCheck.position))
             {
@@ -161,16 +158,15 @@ public class CharacterController3d : MonoBehaviour
                 canDubbleJump = true;
                 shouldTick = true;
                 playerRigidbody.velocity = Vector2.zero;
-                if (Physics2D.gravity.normalized.y != 0)
+                if (Physics.gravity.normalized.y != 0)
                 {
-                    velocityToAply = (new Vector3(-Physics2D.gravity.normalized.y * -wallJumpForceX, -Physics2D.gravity.normalized.y * wallJumpForceY));
+                    velocityToAply = (new Vector3(-Physics.gravity.normalized.y * wallJumpForceX, -Physics.gravity.normalized.y * wallJumpForceY, 0f));
                 }
                 else
                 {
-                    velocityToAply = (new Vector3(-Physics2D.gravity.normalized.x * wallJumpForceY, Physics2D.gravity.normalized.x * -wallJumpForceX));
+                    velocityToAply = (new Vector3(-Physics.gravity.normalized.x * wallJumpForceY, Physics.gravity.normalized.x * wallJumpForceX, 0f));
                 }
                 OnJumpEvent.Invoke();
-                Debug.Log("just wall jumped left");
             }
             else  if(canDubbleJump)
             {
@@ -179,8 +175,8 @@ public class CharacterController3d : MonoBehaviour
                 else
                     playerRigidbody.velocity = new Vector3(0f, playerRigidbody.velocity.y, 0f);
 
-                OnJumpEvent.Invoke();
                 playerRigidbody.AddForce(jumpDir * m_JumpForce);
+                OnJumpEvent.Invoke();
                 canDubbleJump = false;
             }
         }

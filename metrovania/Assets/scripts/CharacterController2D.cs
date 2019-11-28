@@ -240,8 +240,8 @@ public class CharacterController2D : MonoBehaviour
                 else
                     playerRigidbody.velocity = new Vector2(0f, playerRigidbody.velocity.y);
 
-                OnJumpEvent.Invoke();
                 playerRigidbody.AddForce(jumpDir * m_JumpForce);
+                OnJumpEvent.Invoke();
                 canDubbleJump = false;
             }
         }
