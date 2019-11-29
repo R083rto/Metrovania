@@ -243,7 +243,7 @@ MonoBehaviour:
   m_LeftCheck: {fileID: 8812984636400248698}
   CharacterSprite: {fileID: 3035064752614014484}
   wallJumpForceX: 3
-  wallJumpForceY: 12
+  wallJumpForceY: 7
   wallSlideForce: 0.01
   wallJumptimer: 0.15
   OnLandEvent:
@@ -260,8 +260,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   OnJumpEvent:
     m_PersistentCalls:
       m_Calls:
@@ -276,8 +274,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   speed: 0
 --- !u!95 &1658021825
 Animator:
