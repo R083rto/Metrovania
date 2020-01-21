@@ -94,18 +94,22 @@ public class CharacterController2D : MonoBehaviour
 
         if(Physics2D.gravity.normalized == Vector2.down)
         {
+            
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), step);
         }
         else if (Physics2D.gravity.normalized == Vector2.up)
         {
+            
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 180), step);
         }
         else if (Physics2D.gravity.normalized == Vector2.left)
         {
+            
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, -90), step);
         }
         else if (Physics2D.gravity.normalized == Vector2.right)
         {
+            
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 90), step);
         }
     }

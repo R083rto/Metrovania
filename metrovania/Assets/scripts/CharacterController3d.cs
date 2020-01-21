@@ -72,20 +72,26 @@ public class CharacterController3d : MonoBehaviour
 
         float step = speed * Time.deltaTime;
 
+        Debug.Log(Physics.gravity.normalized);
+
         if (Physics.gravity.normalized == Vector3.down)
         {
+            Debug.Log("down");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), step);
         }
-        else if (Physics.gravity.normalized == Vector3.down)
+        else if (Physics.gravity.normalized == Vector3.up)
         {
+            Debug.Log("up");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 180), step);
         }
-        else if (Physics.gravity.normalized == Vector3.down)
+        else if (Physics.gravity.normalized == Vector3.left)
         {
+            Debug.Log("left");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, -90), step);
         }
-        else if (Physics.gravity.normalized == Vector3.down)
+        else if (Physics.gravity.normalized == Vector3.right)
         {
+            Debug.Log("right");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 90), step);
         }
     }
