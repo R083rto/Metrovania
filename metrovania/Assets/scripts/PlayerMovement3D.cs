@@ -25,7 +25,14 @@ public class PlayerMovement3D : MonoBehaviour
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-        playerAnimator.SetFloat("speed", Mathf.Abs(horizontalMove));
+       if(horizontalMove != 0)
+        {
+            playerAnimator.SetBool("IsRunning", true);
+        }
+       else
+        {
+            playerAnimator.SetBool("IsRunning", false);
+        }
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -42,7 +49,10 @@ public class PlayerMovement3D : MonoBehaviour
     public void OnJump()
     {
         if (!playerAnimator.GetBool("IsJumping"))
+        {
+            playerAnimator.SetTrigger("TakeOf");
             playerAnimator.SetBool("IsJumping", true);
+        }
         else
         {
             playerAnimator.SetBool("IsJumping", true);
