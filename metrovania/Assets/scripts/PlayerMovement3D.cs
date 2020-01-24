@@ -41,6 +41,17 @@ public class PlayerMovement3D : MonoBehaviour
         }
     }
 
+    public void OnWallClimb()
+    {
+        playerAnimator.SetTrigger("ClingToWall");
+    }
+
+    public void OnLetGoOfWall()
+    {
+        playerAnimator.SetTrigger("LetGoOfWall");
+        playerAnimator.SetBool("IsJumping", true);
+    }
+
     public void OnLanding()
     {
         playerAnimator.SetBool("IsJumping", false);

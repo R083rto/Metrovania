@@ -31,7 +31,9 @@ public class CharacterController3d : MonoBehaviour
 
     public UnityEvent OnLandEvent;
     public UnityEvent OnJumpEvent;
-    
+    public UnityEvent OnWallCling;
+    public UnityEvent OnLetGoOfWall;
+
     private bool canDubbleJump = false;
 
     float tickUp = 0f;
@@ -48,6 +50,12 @@ public class CharacterController3d : MonoBehaviour
 
         if (OnJumpEvent == null)
             OnJumpEvent = new UnityEvent();
+
+        if (OnWallCling == null)
+            OnWallCling = new UnityEvent();
+
+        if (OnLetGoOfWall == null)
+            OnLetGoOfWall = new UnityEvent();
     }
 
     private void FixedUpdate()
@@ -193,7 +201,11 @@ public class CharacterController3d : MonoBehaviour
                 {
                     velocityToAply = (new Vector3(wallSlideForce, 0f));
                 }
-                OnJumpEvent.Invoke();
+                OnWallCling.Invoke();
+            }
+            else if (shouldTick)
+            {
+                OnLetGoOfWall.Invoke();
             }
         }
         
