@@ -47,7 +47,7 @@ public class CharacterController3d : MonoBehaviour
             OnLandEvent = new UnityEvent();
 
         if (OnJumpEvent == null)
-            OnLandEvent = new UnityEvent();
+            OnJumpEvent = new UnityEvent();
     }
 
     private void FixedUpdate()
@@ -56,14 +56,11 @@ public class CharacterController3d : MonoBehaviour
         m_Grounded = false;
 
         Collider[] colliders = Physics.OverlapSphere(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-        for(int i =0; i < colliders.Length; i++)
+        if(colliders.Length > 0)
         {
-            if(colliders[i].gameObject != gameObject)
-            {
-                m_Grounded = true;
-                if (!wasGrounded)
-                    OnLandEvent.Invoke();
-            }
+            m_Grounded = true;
+            if (!wasGrounded)
+                OnLandEvent.Invoke();
         }
     }
 
@@ -72,26 +69,20 @@ public class CharacterController3d : MonoBehaviour
 
         float step = speed * Time.deltaTime;
 
-        Debug.Log(Physics.gravity.normalized);
-
         if (Physics.gravity.normalized == Vector3.down)
         {
-            Debug.Log("down");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 0), step);
         }
         else if (Physics.gravity.normalized == Vector3.up)
         {
-            Debug.Log("up");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 180), step);
         }
         else if (Physics.gravity.normalized == Vector3.left)
         {
-            Debug.Log("left");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, -90), step);
         }
         else if (Physics.gravity.normalized == Vector3.right)
         {
-            Debug.Log("right");
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, 90), step);
         }
     }
@@ -133,7 +124,6 @@ public class CharacterController3d : MonoBehaviour
 
         if(m_Grounded && jump)
         {
-            m_Grounded = false;
             playerRigidbody.AddForce(jumpDir * m_JumpForce);
             OnJumpEvent.Invoke();
         }

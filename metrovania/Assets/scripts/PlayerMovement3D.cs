@@ -48,16 +48,9 @@ public class PlayerMovement3D : MonoBehaviour
 
     public void OnJump()
     {
-        if (!playerAnimator.GetBool("IsJumping"))
-        {
-            playerAnimator.SetTrigger("TakeOf");
-            playerAnimator.SetBool("IsJumping", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("IsJumping", true);
-            playerAnimator.Play("placeholder_jump", -1, 0f);
-        }
+        playerAnimator.SetTrigger("TakeOf");
+        playerAnimator.SetBool("IsJumping", true);
+        
     }
 
     private void FixedUpdate()
